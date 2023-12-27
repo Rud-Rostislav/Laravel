@@ -90,6 +90,7 @@
             width: 100%;
             box-shadow: #000000 0 0 5px -2px;
         }
+
         textarea {
             resize: none;
             min-height: 30vh;
@@ -100,7 +101,12 @@
 <header>
     <a href="{{url('/')}}">Main</a>
     <a href="{{route('posts.index')}}">All post</a>
-    <a href="{{route('posts.create')}}">Create post</a>
+    @if( Auth::check())
+        <a href="{{route('posts.create')}}">Create post</a>
+    @else
+        <a href="{{route('login')}}">Login</a>
+        <a href="{{route('register')}}">Register</a>
+    @endif
 </header>
 @yield('body')
 </body>

@@ -13,18 +13,19 @@
 
     <div class="post-wrapper">
         @foreach($posts as $post)
-            <div class="post">
+            <div class="post" style="justify-content: @if( Auth::check()) space-between @else center @endif">
                 <h2>{{$post->title}}</h2>
                 <p>{{$post->text}}</p>
-                <a href="{{route('posts.show', $post->id)}}" class="link">More</a>
+                @if( Auth::check())
+                    <a href="{{route('posts.show', $post->id)}}" class="link">More</a>
+                @endif
             </div>
         @endforeach
     </div>
 
     <style>
         .post:hover {
-            transition: 1s;
-            transform: scale(1.05);
+            transition: 0.5s;
             box-shadow: #000000 0 0 5px 0
         }
     </style>

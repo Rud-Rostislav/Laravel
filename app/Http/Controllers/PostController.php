@@ -14,7 +14,7 @@ class PostController extends Controller
 {
     public function index(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $posts = Post::all();
+        $posts = Post::all()->reverse();
         return view('posts.index', compact('posts'));
     }
 
@@ -48,23 +48,35 @@ class PostController extends Controller
 
     public function edit(Post $post): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        $post = Post::find($post->id);
-        return view('posts.edit', compact('post'));
+        if (!$post->canEdit()) {
+            abort(403, 'Unauthorized action.');
+        } else {
+            $post = Post::find($post->id);
+            return view('posts.edit', compact('post'));
+        }
     }
 
     public function update(Request $request, Post $post): RedirectResponse
     {
-        $post = Post::find($post->id);
-        $post->title = $request->title;
-        $post->text = $request->text;
-        $post->save();
-        return redirect()->route('posts.index');
+        if (!$post->canEdit()) {
+            abort(403, 'Unauthorized action.');
+        } else {
+            $post = Post::find($post->id);
+            $post->title = $request->title;
+            $post->text = $request->text;
+            $post->save();
+            return redirect()->route('posts.index');
+        }
     }
 
     public function destroy(Post $post): RedirectResponse
     {
-        $post = Post::find($post->id);
-        $post->delete();
-        return redirect()->route('posts.index');
+        if (!$post->canEdit()) {
+            abort(403, 'Unauthorized action.');
+        } else {
+            $post = Post::find($post->id);
+            $post->delete();
+            return redirect()->route('posts.index');
+        }
     }
 }
