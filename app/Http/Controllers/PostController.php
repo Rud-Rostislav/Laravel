@@ -48,7 +48,7 @@ class PostController extends Controller
 
     public function edit(Post $post): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        if (!$post->canEdit()) {
+        if (!$post->haveAccessPost()) {
             abort(403, 'Unauthorized action.');
         } else {
             $post = Post::find($post->id);
@@ -58,20 +58,20 @@ class PostController extends Controller
 
     public function update(Request $request, Post $post): RedirectResponse
     {
-        if (!$post->canEdit()) {
+        if (!$post->haveAccessPost()) {
             abort(403, 'Unauthorized action.');
         } else {
             $post = Post::find($post->id);
             $post->title = $request->title;
             $post->text = $request->text;
             $post->save();
-            return redirect()->route('posts.index');
+            return redirect()->route('posts.show', $post->id);
         }
     }
 
     public function destroy(Post $post): RedirectResponse
     {
-        if (!$post->canEdit()) {
+        if (!$post->haveAccessPost()) {
             abort(403, 'Unauthorized action.');
         } else {
             $post = Post::find($post->id);

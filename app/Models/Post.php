@@ -10,7 +10,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    public function canEdit()
+    public function haveAccessPost(): bool
     {
         $user = Auth::user();
 
