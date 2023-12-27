@@ -5,13 +5,12 @@
 @endsection
 
 @section('body')
-    <h1>Create posts</h1>
 
-    <form action="{{ route('posts.store') }}" method="post"
-          style="display: flex; flex-direction: column; width: 30vw; margin: 0 auto; gap: 25px;">
+    <form action="{{ route('posts.store') }}" method="post" class="form-create-edit">
         @csrf
-        <input type="text" name="title" placeholder="title">
-        <textarea name="text" placeholder="Text"></textarea>
-        <input type="submit" value="Submit">
+        <h1>Create posts</h1>
+        <input type="text" name="title" placeholder="title" class="input-textarea">
+        <textarea name="text" placeholder="Text" class="input-textarea"></textarea>
+        <input type="submit" value="Submit" class="link">
     </form>
 @endsection

@@ -5,14 +5,14 @@
 @endsection
 
 @section('body')
-    <h1>Edit posts</h1>
 
-    <form action="{{ route('posts.update', $post->id) }}" method="post"
-          style="display: flex; flex-direction: column; width: 30vw; margin: 0 auto; gap: 25px;">
+    <form action="{{ route('posts.update', $post->id) }}" method="post" class="form-create-edit">
         @csrf
         @method('PUT')
-        <input type="text" name="title" placeholder="title" value="{{old('title', $post->title)}}">
-        <textarea name="text" placeholder="Text">{{old('text', $post->text)}}</textarea>
-        <input type="submit" value="Edit">
+        <h1>Edit posts {{ $post->id }}</h1>
+        <input type="text" name="title" placeholder="title" value="{{old('title', $post->title)}}" class="input-textarea">
+        <textarea name="text" placeholder="Text" class="input-textarea">{{old('text', $post->text)}}</textarea>
+        <input type="submit" value="Edit" class="link">
     </form>
+
 @endsection
