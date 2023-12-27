@@ -6,8 +6,9 @@
 
 @section('body')
     <div class="post-wrapper" style="min-height: 84vh; align-items: center;">
-        <div class="post"
-             style="justify-content: @if( Auth::check() && $post->haveAccessPost()) space-between @else center @endif; min-height: 50vh; width: 50%">
+        <div class="post" style="min-height: 50vh; width: 50%;
+        justify-content: @if( Auth::check() && $post->haveAccessPost()) space-between @else center @endif;">
+
             <div>
                 <p>Post ID: {{ $post->id }}</p>
                 <p>Created by:</p>
@@ -17,6 +18,7 @@
                 <p>Updated at:</p>
                 <p>{{ $post->updated_at->format('Y-m-d H:i:s') }}</p>
             </div>
+
             <div style="font-size: 1.25rem">
                 <div style="display: flex; flex-direction: column; gap: 50px">
                     <p>{{$post->title}}</p>
@@ -36,6 +38,7 @@
                     </form>
                 </div>
             @endif
+
         </div>
     </div>
 @endsection

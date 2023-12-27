@@ -29,5 +29,4 @@
             box-shadow: #000000 0 0 5px 0
         }
     </style>
-
 @endsection

@@ -26,6 +26,12 @@ class PostController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $post = new Post();
+
+        $request->validate([
+            'title' => 'required',
+            'text' => 'required',
+        ]);
+
         $post->title = $request->title;
         $post->text = $request->text;
 
@@ -62,6 +68,10 @@ class PostController extends Controller
             abort(403, 'Unauthorized action.');
         } else {
             $post = Post::find($post->id);
+            $request->validate([
+                'title' => 'required',
+                'text' => 'required',
+            ]);
             $post->title = $request->title;
             $post->text = $request->text;
             $post->save();

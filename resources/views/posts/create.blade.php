@@ -5,12 +5,23 @@
 @endsection
 
 @section('body')
-
     <form action="{{ route('posts.store') }}" method="post" class="form-create-edit">
         @csrf
         <h1>Create posts</h1>
-        <input type="text" name="title" placeholder="title" class="input-textarea" style="text-transform: capitalize">
-        <textarea name="text" placeholder="Text" class="input-textarea"></textarea>
+
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                <p style="color: red">{{ $error }}</p>
+            @endforeach
+        @endif
+
+        <label>
+            <input type="text" name="title" placeholder="title" class="input-textarea"
+                   style="text-transform: capitalize">
+        </label>
+        <label>
+            <textarea name="text" placeholder="Text" class="input-textarea"></textarea>
+        </label>
         <input type="submit" value="Submit" class="link">
     </form>
 @endsection
