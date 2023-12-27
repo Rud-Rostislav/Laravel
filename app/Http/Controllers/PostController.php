@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -40,8 +41,9 @@ class PostController extends Controller
 
     public function show(Post $post): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
+        $user = User::find($post->user_id);
         $post = Post::find($post->id);
-        return view('posts.show', compact('post'));
+        return view('posts.show', compact('post', 'user'));
     }
 
     public function edit(Post $post): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
