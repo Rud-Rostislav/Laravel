@@ -16,9 +16,16 @@ class PostRequest extends FormRequest
 
     public function rules(): array
     {
-        return [
-            'title' => ['required', 'string', 'max:50', 'min:3', 'unique:posts'],
-            'text' => ['required', 'string', 'max:50', 'min:10', 'unique:posts'],
+        $rules = [
+            'title' => ['required', 'string', 'max:50', 'min:3'],
+            'text' => ['required', 'string', 'max:500', 'min:1'],
         ];
+
+        if ($this->getMethod() === 'POST') {
+            $rules['title'][] = 'unique:posts';
+            $rules['text'][] = 'unique:posts';
+        }
+
+        return $rules;
     }
 }
