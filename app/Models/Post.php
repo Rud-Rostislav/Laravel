@@ -15,7 +15,6 @@ class Post extends Model
     public function haveAccessPost(): bool
     {
         $user = Auth::user();
-
         return $user && ($this->user_id === $user->id || $user->is_admin === 1);
     }
 }

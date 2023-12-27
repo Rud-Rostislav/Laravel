@@ -17,10 +17,10 @@
 
         <label>
             <input type="text" name="title" placeholder="title" class="input-textarea"
-                   style="text-transform: capitalize">
+                   style="text-transform: capitalize" value="{{ old('title') }}">
         </label>
         <label>
-            <textarea name="text" placeholder="Text" class="input-textarea"></textarea>
+            <textarea name="text" placeholder="Text" class="input-textarea">{{ old('text') }}</textarea>
         </label>
         <input type="submit" value="Submit" class="link">
     </form>
