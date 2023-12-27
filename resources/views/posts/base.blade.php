@@ -19,10 +19,11 @@
     </style>
 </head>
 <body>
-    <header style="margin: 0 0 50px; padding: 25px; font-size: 1.3rem; background: #2c2f34; display: flex; justify-content: center; gap: 25px">
-        <a style="color: white" href="{{route('posts.index')}}">All post</a>
-        <a style="color: white" href="{{route('posts.create')}}">Create post</a>
-    </header>
-    @yield('body')
+<header
+    style="padding: 25px; font-size: 1.3rem; background: #2c2f34; display: flex; justify-content: center; align-items: center; gap: 25px; height: 3vh;">
+    <a style="color: white" href="{{route('posts.index')}}">All post</a>
+    <a style="color: white" href="{{route('posts.create')}}">Create post</a>
+</header>
+@yield('body')
 </body>
 </html>
