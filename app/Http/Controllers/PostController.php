@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Contracts\View\Factory;
@@ -23,15 +24,9 @@ class PostController extends Controller
         return view('posts.create');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(PostRequest $request): RedirectResponse
     {
         $post = new Post();
-
-        $request->validate([
-            'title' => 'required',
-            'text' => 'required',
-        ]);
-
         $post->title = $request->title;
         $post->text = $request->text;
 
@@ -62,16 +57,12 @@ class PostController extends Controller
         }
     }
 
-    public function update(Request $request, Post $post): RedirectResponse
+    public function update(PostRequest $request, Post $post): RedirectResponse
     {
         if (!$post->haveAccessPost()) {
             abort(403, 'Unauthorized action.');
         } else {
             $post = Post::find($post->id);
-            $request->validate([
-                'title' => 'required',
-                'text' => 'required',
-            ]);
             $post->title = $request->title;
             $post->text = $request->text;
             $post->save();

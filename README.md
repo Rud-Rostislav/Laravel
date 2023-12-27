@@ -97,10 +97,11 @@ Laravel seeders дозволяють вам заповнити ваші бази
     php artisan migrate:fresh --seed
 12. Запустити:
     php artisan serve
+13. Створення Request:
+    php artisan make:request PostRequest
 
 ------------------------------------------------------------------------------------------------------------------------
-Створення Request:
-php artisan make:request Worker/StoreRequest
+
 Створити Middleware:
 php artisan make:middleware IsAdminMiddleware
 Створити Policy:
