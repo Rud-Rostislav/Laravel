@@ -17,4 +17,10 @@ class Post extends Model
         $user = Auth::user();
         return $user && ($this->user_id === $user->id || $user->is_admin === 1);
     }
+
+    // Post.php
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -103,9 +103,7 @@
     <a href="{{route('posts.index')}}">All post</a>
     @if( Auth::check())
         <a href="{{route('posts.create')}}">Create post</a>
-        <p style="color: white">Hello, {{Auth::user()->name}}. @if( Auth::user()->is_admin)
-                You are Admin!
-            @endif</p>
+        <a href="{{route('dashboard')}}">@if( Auth::user()->is_admin) Admin @endif ({{ Auth::user()->name }}) Dashboard</a>
     @else
         <a href="{{route('login')}}">Login</a>
         <a href="{{route('register')}}">Register</a>

@@ -16,8 +16,7 @@
         @endif
 
         <label>
-            <input type="text" name="title" placeholder="title" class="input-textarea"
-                   style="text-transform: capitalize" value="{{ old('title') }}">
+            <input type="text" name="title" placeholder="title" class="input-textarea" value="{{ old('title') }}">
         </label>
         <label>
             <textarea name="text" placeholder="Text" class="input-textarea">{{ old('text') }}</textarea>
