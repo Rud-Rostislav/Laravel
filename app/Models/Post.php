@@ -18,9 +18,13 @@ class Post extends Model
         return $user && ($this->user_id === $user->id || $user->is_admin === 1);
     }
 
-    // Post.php
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Comment::class);
     }
 }

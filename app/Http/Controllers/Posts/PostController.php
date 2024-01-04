@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Posts;
 
-use App\Http\Requests\PostRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Posts\PostRequest;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -29,13 +29,7 @@ class PostController extends Controller
         $post = new Post();
         $post->title = $request->title;
         $post->text = $request->text;
-
-        if (auth()->check()) {
-            $post->user_id = auth()->user()->id;
-        } else {
-            $post->user_id = 1;
-        }
-
+        $post->user_id = auth()->user()->id;
         $post->save();
         return redirect()->route('posts.index');
     }
@@ -44,7 +38,8 @@ class PostController extends Controller
     {
         $user = User::find($post->user_id);
         $post = Post::find($post->id);
-        return view('posts.show', compact('post', 'user'));
+        $comments = $post->comments()->with('user')->orderBy('created_at', 'desc')->get();
+        return view('posts.show', compact('post', 'user', 'comments'));
     }
 
     public function edit(Post $post): View|Application|Factory|\Illuminate\Contracts\Foundation\Application

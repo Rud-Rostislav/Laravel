@@ -55,24 +55,26 @@ php artisan make:policy PostPolicy -m Worker
 реєстрації, скидання паролю та інших аутентифікаційних операцій.
 
 ## One to one:
+
 Director - Film
 У міграції фільма створюємо поле:  
 $table->foreignId('director_id')->constrained('directors')->onDelete('cascade');  
 Director model:  
-    public function film(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasOne(Film::class);
-    }
+public function film(): \Illuminate\Database\Eloquent\Relations\HasMany  
+{  
+return $this->hasOne(Film::class);  
+}
 
 ## One to many:
+
 Director - Film
 У міграції фільма створюємо поле:  
 $table->foreignId('director_id')->constrained('directors')->onDelete('cascade');  
 Director model:  
-    public function films(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(Film::class);
-    }
+public function films(): \Illuminate\Database\Eloquent\Relations\HasMany  
+{  
+return $this->hasMany(Film::class);  
+}
 
 # Laravel Start
 
